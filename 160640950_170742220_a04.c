@@ -29,10 +29,35 @@
 
 */
 
-int available[50];
+typedef struct resources
+{
+    int available[10];
+    int max[10][10];
+    int allocation[10][10];
+    int need[10][10];
+} resources;
+
+void init(resources* r, int n, int m, char* args) {
+    
+    return;
+}
 
 int main(int argc, char *argv[]) {
-    printf("Initial Commit\n");
+    FILE *f = fopen("sample4_in.txt", "r");
+
+    //find number of threads from file
+    int n = 0;
+    char s[100];
+    while (fgets(s, 100, f) != NULL) {
+        n++;
+    }
+
+    //number of resource types
+    int m = argc - 1;
+
+    //initialize resources
+    resources* r =  (resources*) malloc(sizeof(resources));
+    init(r, n, m, argv);
 
     return 0;
 }
