@@ -15,8 +15,8 @@
         160640950
 
         Prit Patel
-        patexxxx@mylaurier.ca
-        xxxxxxxxx
+        pate2220@mylaurier.ca
+        170742220
 
     June 30, 2021
 
