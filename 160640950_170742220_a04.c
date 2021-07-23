@@ -31,14 +31,29 @@
 
 typedef struct resources
 {
-    int available[10];
-    int max[10][10];
-    int allocation[10][10];
-    int need[10][10];
+    int *available;    //[numtypes]
+    int *max;          //[numthreads][numtypes] 
+    int *allocation;   //[numthreads][numtypes] 
+    int *need;         //[numthreads][numtypes] 
 } resources;
 
-void init(resources* r, int n, int m, char* args) {
+//initialize all resource structures
+void init(resources* r, int numthreads, int numtypes, char *args[]) {
     
+    //available
+    r->available = malloc(sizeof(int) * numtypes);
+    for (int i = 1; i < numtypes + 1; i++) {
+        char *p;
+        int v = strtol(args[i], &p, 10);
+        r->available[i - 1] = v;
+    }
+
+    //max
+
+    //allocation
+
+    //need
+
     return;
 }
 
@@ -46,18 +61,18 @@ int main(int argc, char *argv[]) {
     FILE *f = fopen("sample4_in.txt", "r");
 
     //find number of threads from file
-    int n = 0;
+    int numthreads = 0;
     char s[100];
     while (fgets(s, 100, f) != NULL) {
-        n++;
+        numthreads++;
     }
 
     //number of resource types
-    int m = argc - 1;
+    int numtypes = argc - 1;
 
     //initialize resources
-    resources* r =  (resources*) malloc(sizeof(resources));
-    init(r, n, m, argv);
+    resources* r = malloc(sizeof(resources));
+    init(r, numthreads, numtypes, argv);
 
     return 0;
 }
