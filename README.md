@@ -1,5 +1,5 @@
 # CP386 Assignment 4
-Multithreaded Banker's Algorithm
+**Multithreaded Banker's Algorithm**
 
 ## Motivation
 The course concepts demonstrated with the implementation of this algorithm are extremely useful in many real-world scenarios. Deciding whether threads are safe to proceed and avoiding deadlock is essential to success with threading.
