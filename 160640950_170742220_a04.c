@@ -54,10 +54,8 @@ void init(resources* r, int numthreads, int numtypes, char *args[]) {
     //structures below are empty, but allocated memory
     //MAX
     r->max = calloc(numthreads * numtypes, sizeof(int));
-
     //ALLOCATION
     r->allocation = calloc(numthreads * numtypes, sizeof(int));
-
     //NEED
     r->need = calloc(numthreads * numtypes, sizeof(int));
 
@@ -73,8 +71,7 @@ int main(int argc, char *argv[]) {
     while (fgets(s, 100, f) != NULL) {
         numthreads++;
     }
-    fclose(f);
-
+    
     //number of resource types
     int numtypes = argc - 1;
 
@@ -82,5 +79,38 @@ int main(int argc, char *argv[]) {
     resources* r = malloc(sizeof(resources));
     init(r, numthreads, numtypes, argv);
 
+    char *buff;
+    rewind(f); //set file pointer back to beginning for reading
+    
+    //populating MAX
+    int a = 0;
+    for (int x = 0; x < numthreads; x++) {
+        fgets(s, 100, f);
+        char *p;
+        buff = strtok(s, ",");
+        for (int y = 0; y < numtypes; y++) {
+            int val = strtol(buff, &p, 10);
+            r->max[a] = val;
+            a++;
+            //printf("%d ", val);
+            buff = strtok(NULL, ",");
+        }
+    }
+
+    //testing values for MAX
+    printf("--MAX--\n");
+    for (int i = 0; i < numthreads * numtypes; i++) {
+        printf("%d ", r->max[i]);
+        if ((i + 1) % numtypes == 0) {
+            printf("\n");
+        }
+    }
+    printf("-------\n");
+
+    //printf("\n");
+
+
+
+    fclose(f);
     return 0;
 }
