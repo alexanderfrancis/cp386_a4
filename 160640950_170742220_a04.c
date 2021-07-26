@@ -62,6 +62,11 @@ void init(resources* r, int numthreads, int numtypes, char *args[]) {
     return;
 }
 
+//function for servicing calls
+int command(char *c, int tid, int *res) {
+    return 0;
+}
+
 int main(int argc, char *argv[]) {
     FILE *f = fopen("sample4_in.txt", "r");
 
