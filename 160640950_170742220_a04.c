@@ -37,22 +37,29 @@ typedef struct resources
     int *need;         //[numthreads][numtypes] 
 } resources;
 
-//initialize all resource structures
+//initialize all resource structures, fill available
 void init(resources* r, int numthreads, int numtypes, char *args[]) {
     
-    //available
+    //AVAILABLE
     r->available = malloc(sizeof(int) * numtypes);
     for (int i = 1; i < numtypes + 1; i++) {
         char *p;
         int v = strtol(args[i], &p, 10);
         r->available[i - 1] = v;
     }
+    // for (int i = 0; i < numtypes; i++) {
+    //     printf("%d\n", r->available[i]);
+    // }
 
-    //max
+    //structures below are empty, but allocated memory
+    //MAX
+    r->max = calloc(numthreads * numtypes, sizeof(int));
 
-    //allocation
+    //ALLOCATION
+    r->allocation = calloc(numthreads * numtypes, sizeof(int));
 
-    //need
+    //NEED
+    r->need = calloc(numthreads * numtypes, sizeof(int));
 
     return;
 }
@@ -66,6 +73,7 @@ int main(int argc, char *argv[]) {
     while (fgets(s, 100, f) != NULL) {
         numthreads++;
     }
+    fclose(f);
 
     //number of resource types
     int numtypes = argc - 1;
