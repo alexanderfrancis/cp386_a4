@@ -6,3 +6,20 @@ The course concepts demonstrated with the implementation of this algorithm are e
 
 ## Installation
 Clone the repository via the .git URL into a desired folder. Once the repository has finished cloning, run the make file by entering the following command into your Bash shell: `make run`. The shell will execute the program and allow the user to interact.
+
+## Screenshots
+
+## Individual Contribution
+
+
+## Features
+
+## Test Cases
+
+## Use Examples
+
+## About Developers
+
+## Credits
+
+## License
