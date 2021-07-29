@@ -195,6 +195,33 @@ int readFile(char* fileName)//do not modify this method
 
                 }
         }
+    int *available;    //[numtypes]
+    int *max;          //[numthreads][numtypes] 
+    int *allocation;   //[numthreads][numtypes] 
+    int *need;         //[numthreads][numtypes] 
+} resources;
+
+//initialize all resource structures, fill available
+void init(resources* r, int numthreads, int numtypes, char *args[]) {
+    
+    //AVAILABLE
+    r->available = malloc(sizeof(int) * numtypes);
+    for (int i = 1; i < numtypes + 1; i++) {
+        char *p;
+        int v = strtol(args[i], &p, 10);
+        r->available[i - 1] = v;
+    }
+    // for (int i = 0; i < numtypes; i++) {
+    //     printf("%d\n", r->available[i]);
+    // }
+
+    //structures below are empty, but allocated memory
+    //MAX
+    r->max = calloc(numthreads * numtypes, sizeof(int));
+    //ALLOCATION
+    r->allocation = calloc(numthreads * numtypes, sizeof(int));
+    //NEED
+    r->need = calloc(numthreads * numtypes, sizeof(int));
 
         char * token;
         // loops through the string to extract all other tokens
@@ -383,6 +410,23 @@ void Ast(){
 }
 
 int safety(){
+//function for servicing calls
+int command(char *c, int tid, int *res) {
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    FILE *f = fopen("sample4_in.txt", "r");
+
+    //find number of threads from file
+    int numthreads = 0;
+    char s[100];
+    while (fgets(s, 100, f) != NULL) {
+        numthreads++;
+    }
+    
+    //number of resource types
+    int numtypes = argc - 1;
 
         int i = 0;
         int j = 0;
@@ -403,4 +447,38 @@ int safety(){
         }
 
         return safe;
+    char *buff;
+    rewind(f); //set file pointer back to beginning for reading
+    
+    //populating MAX
+    int a = 0;
+    for (int x = 0; x < numthreads; x++) {
+        fgets(s, 100, f);
+        char *p;
+        buff = strtok(s, ",");
+        for (int y = 0; y < numtypes; y++) {
+            int val = strtol(buff, &p, 10);
+            r->max[a] = val;
+            a++;
+            //printf("%d ", val);
+            buff = strtok(NULL, ",");
+        }
+    }
+
+    //testing values for MAX
+    printf("--MAX--\n");
+    for (int i = 0; i < numthreads * numtypes; i++) {
+        printf("%d ", r->max[i]);
+        if ((i + 1) % numtypes == 0) {
+            printf("\n");
+        }
+    }
+    printf("-------\n");
+
+    //printf("\n");
+
+
+
+    fclose(f);
+    return 0;
 }
