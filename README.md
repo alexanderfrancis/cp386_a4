@@ -27,8 +27,8 @@ Some initial functions were written by Alexander Francis and were replaced along
 Any situation where threads require multiple types and amounts of different system resources can implement the banker's algorithm in order to ensure that no threads are left waiting for resources indefinitely.
 
 ## About Developers and Credits
-Prit Patel: 
-Alexander Francis: 4th year Computer Science student that enjoys playing sports and writing backend scripts
+- Prit Patel: 
+- Alexander Francis: 4th year Computer Science student that enjoys playing sports and writing backend scripts
 
 ## License
 Copyright 2021 Prit Patel, Alexander Francis
